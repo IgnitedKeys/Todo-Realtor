@@ -5,17 +5,30 @@ class DetailVC: UIViewController {
     var tasks : [Task]?
     var user: User?
     private let cellIdentifier = "cell"
-    var tableView: UITableView!
+    //var tableView: UITableView!
+    
+    lazy var userInfoView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 400))
+        view.backgroundColor = .gray
+        return view
+    }()
+    
+    lazy var tableView : UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 400, width: self.view.frame.width, height: self.view.frame.height))
+        //setTableView()
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.title = user?.name
         
-        tableView = UITableView()
-        setTableView()
-        self.view = tableView
+        self.view.addSubview(userInfoView)
+        self.view.addSubview(tableView)
         
+//        tableView = UITableView()
+        setTableView()
+        //self.view = tableView
         parse() { (data) in
             print(data.count)
             self.tasks = data
