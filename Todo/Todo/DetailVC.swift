@@ -1,5 +1,31 @@
 import UIKit
 
+class TableHeader: UITableViewHeaderFooterView {
+    static let identifier = "TableHeader"
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Tasks"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(label)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        label.sizeToFit()
+        label.frame = CGRect(x: 0, y: contentView.frame.size.height - 10 - label.frame.size.height, width: contentView.frame.size.width, height: label.frame.size.height)
+    }
+}
+
 class DetailVC: UIViewController {
     
     var tasks : [Task]?
@@ -8,14 +34,13 @@ class DetailVC: UIViewController {
     //var tableView: UITableView!
     
     lazy var userInfoView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 400))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
         view.backgroundColor = .gray
         return view
     }()
     
     lazy var tableView : UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: self.view.frame.height))
-        //setTableView()
+        let tableView = UITableView(frame: CGRect(x: 0, y: 240, width: self.view.frame.width, height: self.view.frame.height - 180))
         return tableView
     }()
     
@@ -23,10 +48,11 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         navigationItem.title = user?.name
         
- 
+        self.view.addSubview(userInfoView)
+        setUserInfo()
         self.view.addSubview(tableView)
         setTableView()
-        self.view.addSubview(userInfoView)
+
 
         parse() { (data) in
             print(data.count)
@@ -39,8 +65,26 @@ class DetailVC: UIViewController {
         
     func setTableView() {
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "header")
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setUserInfo() {
+        let phoneLabel = UILabel(frame: CGRect(x: 10, y: 60, width: self.view.bounds.size.width, height: 100))
+        phoneLabel.text = "Phone: \(user?.phone ?? "N/A")"
+        phoneLabel.textAlignment = .center
+        userInfoView.addSubview(phoneLabel)
+        
+        let emailLabel = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width, height: 100))
+        emailLabel.text = "Email: \(user?.email ?? "N/A")"
+        emailLabel.textAlignment = .center
+        userInfoView.addSubview(emailLabel)
+        
+        let usernameLabel = UILabel(frame: CGRect(x: 10, y: 140, width: self.view.bounds.size.width, height: 100))
+        usernameLabel.text = "Username: \(user?.username ?? "N/A")"
+        usernameLabel.textAlignment = .center
+        userInfoView.addSubview(usernameLabel)
     }
 
     func parse(completion: @escaping ([Task]) -> ()) {
@@ -68,8 +112,13 @@ class DetailVC: UIViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
+        
+        if(offset > 240) {
+            self.userInfoView.frame = CGRect(x: 0, y: 0 , width: self.view.bounds.size.width, height: 0)
+        } else {
+            self.userInfoView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 240 - offset)
+        }
 
-            self.userInfoView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 300 - offset)
 
         let tableRect = CGRect(x: 0, y: self.userInfoView.frame.maxY, width: self.view.bounds.size.width, height:(self.view.bounds.size.height - (self.userInfoView.frame.maxY)))
         tableView.frame = tableRect
@@ -93,7 +142,14 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
 
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        return header
+    }
     
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 200
+//    }
   
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
