@@ -10,8 +10,10 @@
 		3ACC663C296F500A002AD351 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC663B296F500A002AD351 /* AppDelegate.swift */; };
 		3ACC663E296F500A002AD351 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC663D296F500A002AD351 /* SceneDelegate.swift */; };
 		3ACC6645296F500C002AD351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACC6644296F500C002AD351 /* Assets.xcassets */; };
-		3ACC6648296F500C002AD351 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACC6646296F500C002AD351 /* LaunchScreen.storyboard */; };
 		3ACC6650296F50FE002AD351 /* TodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC664F296F50FE002AD351 /* TodoVC.swift */; };
+		3ACC6656296F6124002AD351 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC6655296F6124002AD351 /* Task.swift */; };
+		3ACC6658296F6741002AD351 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC6657296F6741002AD351 /* Tasks.swift */; };
+		3ACC665A296FA2AE002AD351 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC6659296FA2AE002AD351 /* TaskTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,9 +21,11 @@
 		3ACC663B296F500A002AD351 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ACC663D296F500A002AD351 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3ACC6644296F500C002AD351 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3ACC6647296F500C002AD351 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACC6649296F500C002AD351 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACC664F296F50FE002AD351 /* TodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoVC.swift; sourceTree = "<group>"; };
+		3ACC6655296F6124002AD351 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		3ACC6657296F6741002AD351 /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
+		3ACC6659296FA2AE002AD351 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +61,11 @@
 				3ACC663B296F500A002AD351 /* AppDelegate.swift */,
 				3ACC663D296F500A002AD351 /* SceneDelegate.swift */,
 				3ACC6644296F500C002AD351 /* Assets.xcassets */,
-				3ACC6646296F500C002AD351 /* LaunchScreen.storyboard */,
 				3ACC6649296F500C002AD351 /* Info.plist */,
 				3ACC664F296F50FE002AD351 /* TodoVC.swift */,
+				3ACC6655296F6124002AD351 /* Task.swift */,
+				3ACC6657296F6741002AD351 /* Tasks.swift */,
+				3ACC6659296FA2AE002AD351 /* TaskTableViewCell.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -122,7 +128,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACC6648296F500C002AD351 /* LaunchScreen.storyboard in Resources */,
 				3ACC6645296F500C002AD351 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,24 +139,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACC665A296FA2AE002AD351 /* TaskTableViewCell.swift in Sources */,
+				3ACC6658296F6741002AD351 /* Tasks.swift in Sources */,
 				3ACC663C296F500A002AD351 /* AppDelegate.swift in Sources */,
 				3ACC6650296F50FE002AD351 /* TodoVC.swift in Sources */,
+				3ACC6656296F6124002AD351 /* Task.swift in Sources */,
 				3ACC663E296F500A002AD351 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		3ACC6646296F500C002AD351 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3ACC6647296F500C002AD351 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3ACC664A296F500C002AD351 /* Debug */ = {

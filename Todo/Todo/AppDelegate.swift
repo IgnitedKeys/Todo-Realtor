@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Todo
-//
-//  Created by Gavin's Old Mac on 1/11/23.
-//
-
 import UIKit
 
 @main
