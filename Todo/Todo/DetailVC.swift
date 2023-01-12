@@ -3,12 +3,14 @@ import UIKit
 class DetailVC: UIViewController {
     
     var tasks : [Task]?
-    var user: Int?
+    var user: User?
     private let cellIdentifier = "cell"
     var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = user?.name
         
         tableView = UITableView()
         setTableView()
@@ -30,7 +32,7 @@ class DetailVC: UIViewController {
     }
 
     func parse(completion: @escaping ([Task]) -> ()) {
-        let urlString = "https://jsonplaceholder.typicode.com/todos?userId=\(user ?? 3)"
+        let urlString = "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 3)"
         //let urlString = "https://dummyjson.com/todos?limit=3"
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url) {data, res, error in

@@ -76,8 +76,7 @@ extension TodoVC: UITableViewDelegate, UITableViewDataSource {
         
         let user = self.users?[indexPath.row]
         let detailVC = DetailVC()
-        //detailVC.task = task
-        detailVC.user = user?.id
+        detailVC.user = user
 //        navigationController?.pushViewController(detailVC, animated: true)
         show(detailVC, sender: self)
     }
