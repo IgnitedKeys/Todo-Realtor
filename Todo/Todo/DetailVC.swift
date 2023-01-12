@@ -14,7 +14,7 @@ class DetailVC: UIViewController {
     }()
     
     lazy var tableView : UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 400, width: self.view.frame.width, height: self.view.frame.height))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 300, width: self.view.frame.width, height: self.view.frame.height))
         //setTableView()
         return tableView
     }()
@@ -23,12 +23,11 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         navigationItem.title = user?.name
         
-        self.view.addSubview(userInfoView)
+ 
         self.view.addSubview(tableView)
-        
-//        tableView = UITableView()
         setTableView()
-        //self.view = tableView
+        self.view.addSubview(userInfoView)
+
         parse() { (data) in
             print(data.count)
             self.tasks = data
@@ -67,6 +66,15 @@ class DetailVC: UIViewController {
         }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+
+            self.userInfoView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 300 - offset)
+
+        let tableRect = CGRect(x: 0, y: self.userInfoView.frame.maxY, width: self.view.bounds.size.width, height:(self.view.bounds.size.height - (self.userInfoView.frame.maxY)))
+        tableView.frame = tableRect
+    }
+
 
 }
 
@@ -84,6 +92,8 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
         return tasks?.count ?? 10
 
     }
+    
+    
   
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
