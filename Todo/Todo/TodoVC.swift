@@ -79,11 +79,7 @@ extension TodoVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
             fatalError("Cannot dequeue \(cellIdentifier)")
         }
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TaskTableViewCell {
-//            cell.textLabel?.text = tasks?[indexPath.row].title
-//            return cell
-//        }
-//        fatalError("no cell to dequeue")
+        
         cell.configure(with: tasks?[indexPath.row] ?? Task(userId: 1, id: 300, title: "Loading...", completed: false))
         return cell
     }
@@ -92,4 +88,17 @@ extension TodoVC: UITableViewDelegate, UITableViewDataSource {
         return tasks?.count ?? 10
 
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let task = self.tasks?[indexPath.row]
+        let detailVC = DetailVC()
+        detailVC.task = task
+//        navigationController?.pushViewController(detailVC, animated: true)
+        show(detailVC, sender: self)
+    }
 }
+
+// delete choosen cell, edit choosen cell, change to completed
+//add new cell
