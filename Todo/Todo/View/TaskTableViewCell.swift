@@ -2,6 +2,8 @@ import UIKit
 
 class TaskTableViewCell: UITableViewCell {
     
+    static let identifier = "TaskCell"
+    
     func configure(with task: Task) {
         textLabel?.text = task.title
         if task.completed == true {
@@ -15,7 +17,6 @@ class TaskTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .red
     }
     
     required init?(coder: NSCoder) {

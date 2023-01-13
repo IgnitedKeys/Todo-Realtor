@@ -66,20 +66,44 @@
 		3ACC663A296F500A002AD351 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				3ACC66692971BEBA002AD351 /* Controller */,
+				3ACC66682971BEB4002AD351 /* View */,
+				3ACC66672971BDAC002AD351 /* Model */,
 				3ACC663B296F500A002AD351 /* AppDelegate.swift */,
 				3ACC663D296F500A002AD351 /* SceneDelegate.swift */,
 				3ACC6644296F500C002AD351 /* Assets.xcassets */,
 				3ACC6649296F500C002AD351 /* Info.plist */,
 				3ACC664F296F50FE002AD351 /* TodoVC.swift */,
-				3ACC6655296F6124002AD351 /* Task.swift */,
 				3ACC6657296F6741002AD351 /* Tasks.swift */,
-				3ACC6659296FA2AE002AD351 /* TaskTableViewCell.swift */,
 				3ACC665D297067CB002AD351 /* DetailVC.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		3ACC66672971BDAC002AD351 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3ACC6655296F6124002AD351 /* Task.swift */,
 				3ACC66612970998E002AD351 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3ACC66682971BEB4002AD351 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3ACC6659296FA2AE002AD351 /* TaskTableViewCell.swift */,
 				3ACC666329709AAD002AD351 /* UserTableViewCell.swift */,
 				3ACC66652970CC74002AD351 /* TableHeader.swift */,
 			);
-			path = Todo;
+			path = View;
+			sourceTree = "<group>";
+		};
+		3ACC66692971BEBA002AD351 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

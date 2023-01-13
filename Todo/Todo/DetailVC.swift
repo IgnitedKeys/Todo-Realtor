@@ -4,8 +4,6 @@ class DetailVC: UIViewController {
     
     var tasks : [Task]?
     var user: User?
-    private let cellIdentifier = "cell"
-    //var tableView: UITableView!
     
     lazy var userInfoView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 280))
@@ -53,8 +51,8 @@ class DetailVC: UIViewController {
     }
         
     func setTableView() {
-        tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "header")
+        tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskCell")
+        tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "TableHeader")
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -83,7 +81,7 @@ class DetailVC: UIViewController {
         }
         }
         
-
+//MOVE THIS
     func parse(completion: @escaping ([Task]) -> ()) {
         let urlString = "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 3)"
         //let urlString = "https://dummyjson.com/todos?limit=3"
@@ -114,11 +112,11 @@ class DetailVC: UIViewController {
 
 
 }
-
+//FIX IDENTIFIER
 extension DetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
-            fatalError("Cannot dequeue \(cellIdentifier)")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
+            fatalError("Cannot dequeue \(TaskTableViewCell.identifier)")
         }
         
         cell.configure(with: tasks?[indexPath.row] ?? Task(userId: 1, id: 300, title: "Loading...", completed: false))
@@ -131,7 +129,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeader.identifier)
         return header
     }
     
@@ -148,8 +146,4 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
 ////        navigationController?.pushViewController(detailVC, animated: true)
 //        show(detailVC, sender: self)
 //    }
-
-
-// delete choosen cell, edit choosen cell, change to completed
-//add new cell
 }
