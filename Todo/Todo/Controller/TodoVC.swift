@@ -5,15 +5,24 @@ class TodoVC: UIViewController {
     
     var tasks : [Task]?
     var users : [User]?
-    var tableView: UITableView!
+    //var tableView: UITableView!
     let decoder = Decode()
+    
+    lazy var tableView : UITableView = {
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Team Members"
         
-        tableView = UITableView()
+        view.backgroundColor = .systemGray2
+        
+        //tableView = UITableView()
+       
+        self.view.addSubview(tableView)
         setTableView()
-        self.view = tableView
         
         decoder.decodeUsers() { (data) in
             print(data)
@@ -22,12 +31,22 @@ class TodoVC: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
     }
         
     func setTableView() {
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
+
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let horizontalConstraint = tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        let verticalConstraint = tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        let leadingConstraint = tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        let topConstraint = tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20)
+        let bottomConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        view.addConstraints([horizontalConstraint, verticalConstraint, leadingConstraint, topConstraint, bottomConstraint])
     }
 }
 
@@ -48,6 +67,7 @@ extension TodoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
         
         let user = self.users?[indexPath.row]
         let detailVC = DetailVC()
