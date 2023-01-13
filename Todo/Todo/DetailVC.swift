@@ -1,31 +1,5 @@
 import UIKit
 
-class TableHeader: UITableViewHeaderFooterView {
-    static let identifier = "TableHeader"
-    
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "Tasks"
-        label.textAlignment = .center
-        return label
-    }()
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(label)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        label.sizeToFit()
-        label.frame = CGRect(x: 0, y: contentView.frame.size.height - 10 - label.frame.size.height, width: contentView.frame.size.width, height: label.frame.size.height)
-    }
-}
-
 class DetailVC: UIViewController {
     
     var tasks : [Task]?
@@ -44,13 +18,24 @@ class DetailVC: UIViewController {
         return tableView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = user?.name
         
         self.view.addSubview(userInfoView)
         setUserInfo()
-        self.view.addSubview(tableView)
+        
+        let scrollView = UIScrollView()
+        self.view.addSubview(scrollView)
+
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        //self.view.addSubview(tableView)
+        scrollView.addSubview(tableView)
         setTableView()
 
 
@@ -110,19 +95,6 @@ class DetailVC: UIViewController {
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        
-        if(offset > 240) {
-            self.userInfoView.frame = CGRect(x: 0, y: 0 , width: self.view.bounds.size.width, height: 0)
-        } else {
-            self.userInfoView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 240 - offset)
-        }
-
-
-        let tableRect = CGRect(x: 0, y: self.userInfoView.frame.maxY, width: self.view.bounds.size.width, height:(self.view.bounds.size.height - (self.userInfoView.frame.maxY)))
-        tableView.frame = tableRect
-    }
 
 
 }

@@ -17,6 +17,7 @@
 		3ACC665E297067CB002AD351 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC665D297067CB002AD351 /* DetailVC.swift */; };
 		3ACC66622970998E002AD351 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC66612970998E002AD351 /* User.swift */; };
 		3ACC666429709AAD002AD351 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC666329709AAD002AD351 /* UserTableViewCell.swift */; };
+		3ACC66662970CC74002AD351 /* TableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC66652970CC74002AD351 /* TableHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3ACC665D297067CB002AD351 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		3ACC66612970998E002AD351 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3ACC666329709AAD002AD351 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		3ACC66652970CC74002AD351 /* TableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				3ACC665D297067CB002AD351 /* DetailVC.swift */,
 				3ACC66612970998E002AD351 /* User.swift */,
 				3ACC666329709AAD002AD351 /* UserTableViewCell.swift */,
+				3ACC66652970CC74002AD351 /* TableHeader.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ACC665A296FA2AE002AD351 /* TaskTableViewCell.swift in Sources */,
+				3ACC66662970CC74002AD351 /* TableHeader.swift in Sources */,
 				3ACC666429709AAD002AD351 /* UserTableViewCell.swift in Sources */,
 				3ACC6658296F6741002AD351 /* Tasks.swift in Sources */,
 				3ACC663C296F500A002AD351 /* AppDelegate.swift in Sources */,
