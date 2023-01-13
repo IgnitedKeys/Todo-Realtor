@@ -4,6 +4,7 @@ class DetailVC: UIViewController {
     
     var tasks : [Task]?
     var user: User?
+    let decoder = Decode()
     
     lazy var userInfoView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 280))
@@ -35,21 +36,21 @@ class DetailVC: UIViewController {
         //self.view.addSubview(tableView)
         scrollView.addSubview(tableView)
         setTableView()
-
-
-        parse() { (data) in
-            self.tasks = data
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                
-                let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
-                completeLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
-                completeLabel.textAlignment = .center
-                self.userInfoView.addSubview(completeLabel)
-            }
-        }
+        
+        decoder.decodeTasks(url: "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 3)" ) { (data) in
+                        self.tasks = data
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+            
+                            let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
+                            completeLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
+                            completeLabel.textAlignment = .center
+                            self.userInfoView.addSubview(completeLabel)
+                        }
+                    }
     }
         
+    //check id
     func setTableView() {
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskCell")
         tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "TableHeader")
@@ -79,28 +80,6 @@ class DetailVC: UIViewController {
             completeLabel.textAlignment = .center
             userInfoView.addSubview(completeLabel)
         }
-        }
-        
-//MOVE THIS
-    func parse(completion: @escaping ([Task]) -> ()) {
-        let urlString = "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 3)"
-        //let urlString = "https://dummyjson.com/todos?limit=3"
-        if let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: url) {data, res, error in
-                guard let data = data else {
-                    return print("error")
-                }
-                let decoder = JSONDecoder()
-                
-                do {
-                    let json = try decoder.decode([Task].self, from: data)
-                    //self.tasks = json
-                    completion(json)
-                } catch {
-                    print(error)
-                }
-            }.resume()
-        }
     }
     
     func calculateTasks() -> Int {
@@ -109,10 +88,8 @@ class DetailVC: UIViewController {
         }
         return filtered?.count ?? 0
     }
-
-
 }
-//FIX IDENTIFIER
+
 extension DetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {

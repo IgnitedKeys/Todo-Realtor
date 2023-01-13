@@ -18,6 +18,7 @@
 		3ACC66622970998E002AD351 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC66612970998E002AD351 /* User.swift */; };
 		3ACC666429709AAD002AD351 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC666329709AAD002AD351 /* UserTableViewCell.swift */; };
 		3ACC66662970CC74002AD351 /* TableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC66652970CC74002AD351 /* TableHeader.swift */; };
+		3ACC666B2971C8DD002AD351 /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACC666A2971C8DD002AD351 /* Decode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		3ACC66612970998E002AD351 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3ACC666329709AAD002AD351 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		3ACC66652970CC74002AD351 /* TableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeader.swift; sourceTree = "<group>"; };
+		3ACC666A2971C8DD002AD351 /* Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +75,7 @@
 				3ACC663D296F500A002AD351 /* SceneDelegate.swift */,
 				3ACC6644296F500C002AD351 /* Assets.xcassets */,
 				3ACC6649296F500C002AD351 /* Info.plist */,
-				3ACC664F296F50FE002AD351 /* TodoVC.swift */,
 				3ACC6657296F6741002AD351 /* Tasks.swift */,
-				3ACC665D297067CB002AD351 /* DetailVC.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -85,6 +85,7 @@
 			children = (
 				3ACC6655296F6124002AD351 /* Task.swift */,
 				3ACC66612970998E002AD351 /* User.swift */,
+				3ACC666A2971C8DD002AD351 /* Decode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -102,6 +103,8 @@
 		3ACC66692971BEBA002AD351 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3ACC664F296F50FE002AD351 /* TodoVC.swift */,
+				3ACC665D297067CB002AD351 /* DetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				3ACC6650296F50FE002AD351 /* TodoVC.swift in Sources */,
 				3ACC66622970998E002AD351 /* User.swift in Sources */,
 				3ACC6656296F6124002AD351 /* Task.swift in Sources */,
+				3ACC666B2971C8DD002AD351 /* Decode.swift in Sources */,
 				3ACC663E296F500A002AD351 /* SceneDelegate.swift in Sources */,
 				3ACC665E297067CB002AD351 /* DetailVC.swift in Sources */,
 			);

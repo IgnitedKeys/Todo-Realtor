@@ -1,6 +1,8 @@
 import UIKit
 
 class UserTableViewCell: UITableViewCell {
+    
+    static let identifier = "userCell"
 
     func configure(with user: User) {
         textLabel?.text = user.name
