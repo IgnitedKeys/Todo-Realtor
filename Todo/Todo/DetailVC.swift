@@ -8,13 +8,13 @@ class DetailVC: UIViewController {
     //var tableView: UITableView!
     
     lazy var userInfoView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 280))
         view.backgroundColor = .gray
         return view
     }()
     
     lazy var tableView : UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 240, width: self.view.frame.width, height: self.view.frame.height - 180))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 280, width: self.view.frame.width, height: self.view.frame.height - 300))
         return tableView
     }()
     
@@ -40,10 +40,14 @@ class DetailVC: UIViewController {
 
 
         parse() { (data) in
-            print(data.count)
             self.tasks = data
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                
+                let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
+                completeLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
+                completeLabel.textAlignment = .center
+                self.userInfoView.addSubview(completeLabel)
             }
         }
     }
@@ -70,7 +74,15 @@ class DetailVC: UIViewController {
         usernameLabel.text = "Username: \(user?.username ?? "N/A")"
         usernameLabel.textAlignment = .center
         userInfoView.addSubview(usernameLabel)
-    }
+        
+        if tasks?.count != nil {
+            let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
+            completeLabel.text = "\(tasks?.count)"
+            completeLabel.textAlignment = .center
+            userInfoView.addSubview(completeLabel)
+        }
+        }
+        
 
     func parse(completion: @escaping ([Task]) -> ()) {
         let urlString = "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 3)"
@@ -89,12 +101,16 @@ class DetailVC: UIViewController {
                 } catch {
                     print(error)
                 }
-               
-                
             }.resume()
         }
     }
     
+    func calculateTasks() -> Int {
+        let filtered = tasks?.filter { task in
+            return task.completed == true
+        }
+        return filtered?.count ?? 0
+    }
 
 
 }
@@ -120,7 +136,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 200
+//        return 20
 //    }
   
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
