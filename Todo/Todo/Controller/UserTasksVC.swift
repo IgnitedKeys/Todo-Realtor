@@ -48,7 +48,6 @@ class UserTasksVC: UIViewController {
     }
         
     func setScrollView(_ scrollView: UIScrollView){
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -121,5 +120,23 @@ extension UserTasksVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeader.identifier)
         return header
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.systemBackground
+        
+        if tasks?[indexPath.row].completed == true {
+            UIView.animate(withDuration: 0.25,
+                           delay: 0.05 * Double(indexPath.row),
+                       options: [.curveEaseInOut],
+                       animations: {
+            cell.backgroundColor = UIColor.systemGreen
+        })
+        } else {
+            UIView.animate(withDuration: 0,
+                           animations: {
+                cell.backgroundColor = UIColor.systemBackground
+            })
+        }
     }
 }
