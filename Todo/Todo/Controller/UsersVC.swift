@@ -37,11 +37,11 @@ class UsersVC: UIViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let horizontalConstraint = tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        let verticalConstraint = tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+//        let verticalConstraint = tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         let leadingConstraint = tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         let topConstraint = tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20)
         let bottomConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        view.addConstraints([horizontalConstraint, verticalConstraint, leadingConstraint, topConstraint, bottomConstraint])
+        view.addConstraints([horizontalConstraint, leadingConstraint, topConstraint, bottomConstraint])
     }
 }
 

@@ -64,20 +64,22 @@ class UserTasksVC: UIViewController {
     }
     
     func setUserInfo() {
-        let phoneLabel = UILabel(frame: CGRect(x: 10, y: 60, width: self.view.bounds.size.width, height: 100))
+        let usernameLabel = UILabel(frame: CGRect(x: 10, y: 60, width: self.view.bounds.size.width, height: 100))
+        usernameLabel.text = "Username: \(user?.username ?? "N/A")"
+        usernameLabel.textAlignment = .center
+        userInfoView.addSubview(usernameLabel)
+        
+        let phoneLabel = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width, height: 100))
         phoneLabel.text = "Phone: \(user?.phone ?? "N/A")"
         phoneLabel.textAlignment = .center
         userInfoView.addSubview(phoneLabel)
         
-        let emailLabel = UILabel(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width, height: 100))
+        let emailLabel = UILabel(frame: CGRect(x: 10, y: 140, width: self.view.bounds.size.width, height: 100))
         emailLabel.text = "Email: \(user?.email ?? "N/A")"
         emailLabel.textAlignment = .center
         userInfoView.addSubview(emailLabel)
         
-        let usernameLabel = UILabel(frame: CGRect(x: 10, y: 140, width: self.view.bounds.size.width, height: 100))
-        usernameLabel.text = "Username: \(user?.username ?? "N/A")"
-        usernameLabel.textAlignment = .center
-        userInfoView.addSubview(usernameLabel)
+
         
         if tasks?.count != nil {
             let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))

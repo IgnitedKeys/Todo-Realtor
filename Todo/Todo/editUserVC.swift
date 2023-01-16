@@ -1,35 +1,49 @@
 import UIKit
 
-class editUserVC: UIViewController, UITextFieldDelegate {
+class editUserVC: UIViewController {
     
     var user : User?
     var editedUserInfo : User?
     var phone : String?
     var username : String?
+    var email: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .red
-        //form with user data
-        //button to send data to API
-        //button also dismisses the view
+        self.view.backgroundColor = .systemBackground
         
-        let userPhone = UITextField(frame: CGRect(x: 20, y: 20, width: 300, height: 300))
-        userPhone.becomeFirstResponder()
-        userPhone.placeholder = user?.phone ?? "123-456-7890"
+        let nameLabel = UILabel(frame: CGRect(x: 10, y: 10, width: self.view.bounds.size.width, height: 100))
+        nameLabel.text = "Editing \(user?.name ?? "N/A")"
+        nameLabel.textAlignment = .center
+        view.addSubview(nameLabel)
+        
+        let userUsername = UITextField(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width, height: 40))
+
+        userUsername.placeholder = user?.username ?? "myUsername"
+        userUsername.accessibilityLabel = "userUsername"
+        userUsername.delegate = self
+        self.view.addSubview(userUsername)
+
+        
+        let userPhone = UITextField(frame: CGRect(x: 10, y: 150, width: self.view.bounds.size.width - 20, height: 40))
+
+        userPhone.placeholder = user?.phone ?? "555-555-5555"
+        userPhone.accessibilityLabel = "userPhone"
+        userPhone.font = UIFont.systemFont(ofSize: 20)
+        userPhone.borderStyle = UITextField.BorderStyle.roundedRect
+        userPhone.autocorrectionType = UITextAutocorrectionType.no
+        userPhone.keyboardType = UIKeyboardType.default
+        userPhone.returnKeyType = UIReturnKeyType.done
         userPhone.delegate = self
         self.view.addSubview(userPhone)
-        phone = userPhone.text
+        //phone = userPhone.text
         
-        let userUsername = UITextField(frame: CGRect(x: 20, y: 40, width: 300, height: 300))
-        userUsername.becomeFirstResponder()
-        userUsername.placeholder = user?.username ?? "N/A"
-        userUsername.delegate = self
-        username = userUsername.text
-        self.view.addSubview(userUsername)
-        
-//        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: username ?? "cute", email: user?.email ?? "", phone: phone ?? "555-555-5555")
- 
+        let userEmail = UITextField(frame: CGRect(x: 10, y: 200 , width: self.view.bounds.size.width, height: 40))
+        userEmail.placeholder = user?.email ?? "example.@example.com"
+        userEmail.accessibilityLabel = "userEmail"
+        userEmail.delegate = self
+        self.view.addSubview(userEmail)
+    
         
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 50, y: 50, width: 100, height: 50)
@@ -41,7 +55,8 @@ class editUserVC: UIViewController, UITextFieldDelegate {
         
     
     @objc func editUser() {
-        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: username ?? "cute", email: user?.email ?? "", phone: phone ?? "555-555-5555")
+        editedUserInfo = User(id: user?.id ?? 200, name: user?.name ?? "N/A", username: (username ?? user?.username) ?? "N/A" , email: (email ?? user?.email) ?? "N/A", phone: (phone ?? user?.phone) ?? "N/A")
+ 
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(user!.id)") else {
                     print("Error no URL")
                     return
@@ -88,17 +103,23 @@ class editUserVC: UIViewController, UITextFieldDelegate {
                 }.resume()
         self.dismiss(animated: true, completion: nil)
             }
+}
+
+extension editUserVC: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //phone = textField.text ?? "1234"
+
         self.resignFirstResponder()
-        
-        
-//        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: username ?? "", email: user?.email ?? "", phone: phone ?? "1234")
-        return false
+        if textField.accessibilityLabel == "userPhone" {
+            phone = textField.text
+        } else if textField.accessibilityLabel == "userUsername" {
+            username = textField.text
+        } else if textField.accessibilityLabel == "userEmail" {
+            email = textField.text
+        }
+        return true
     }
-    
-    }
+}
 
     
 
