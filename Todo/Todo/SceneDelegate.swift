@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let vc = TodoVC()
+        let vc = UsersVC()
         let rootNC = UINavigationController(rootViewController: vc)
         //window?.rootViewController = TodoVC()
         window?.rootViewController = rootNC

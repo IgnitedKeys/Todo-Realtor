@@ -1,11 +1,10 @@
 import UIKit
 
 
-class TodoVC: UIViewController {
+class UsersVC: UIViewController {
     
     var tasks : [Task]?
     var users : [User]?
-    //var tableView: UITableView!
     let decoder = Decode()
     
     lazy var tableView : UITableView = {
@@ -18,9 +17,6 @@ class TodoVC: UIViewController {
         navigationItem.title = "Team Members"
         
         view.backgroundColor = .secondarySystemBackground
-        
-        //tableView = UITableView()
-       
         self.view.addSubview(tableView)
         setTableView()
         
@@ -31,7 +27,6 @@ class TodoVC: UIViewController {
                 self.tableView.reloadData()
             }
         }
-        
     }
         
     func setTableView() {
@@ -50,7 +45,7 @@ class TodoVC: UIViewController {
     }
 }
 
-extension TodoVC: UITableViewDelegate, UITableViewDataSource {
+extension UsersVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as? UserTableViewCell else {
             fatalError("Cannot dequeue \(UserTableViewCell.identifier)")
@@ -67,12 +62,10 @@ extension TodoVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
         
         let user = self.users?[indexPath.row]
         let detailVC = DetailVC()
         detailVC.user = user
-//        navigationController?.pushViewController(detailVC, animated: true)
         show(detailVC, sender: self)
     }
 

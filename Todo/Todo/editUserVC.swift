@@ -4,9 +4,8 @@ class editUserVC: UIViewController, UITextFieldDelegate {
     
     var user : User?
     var editedUserInfo : User?
-    
-    var phone: String?
- 
+    var phone : String?
+    var username : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,13 +14,21 @@ class editUserVC: UIViewController, UITextFieldDelegate {
         //button to send data to API
         //button also dismisses the view
         
-        let userPhone = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 300))
+        let userPhone = UITextField(frame: CGRect(x: 20, y: 20, width: 300, height: 300))
+        userPhone.becomeFirstResponder()
         userPhone.placeholder = user?.phone ?? "123-456-7890"
         userPhone.delegate = self
         self.view.addSubview(userPhone)
+        phone = userPhone.text
         
-        //let phone = "12345"
-        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: user?.username ?? "", email: user?.email ?? "", phone: userPhone.text ?? "555-555-5555")
+        let userUsername = UITextField(frame: CGRect(x: 20, y: 40, width: 300, height: 300))
+        userUsername.becomeFirstResponder()
+        userUsername.placeholder = user?.username ?? "N/A"
+        userUsername.delegate = self
+        username = userUsername.text
+        self.view.addSubview(userUsername)
+        
+//        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: username ?? "cute", email: user?.email ?? "", phone: phone ?? "555-555-5555")
  
         
         let button = UIButton(type: .system)
@@ -34,6 +41,7 @@ class editUserVC: UIViewController, UITextFieldDelegate {
         
     
     @objc func editUser() {
+        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: username ?? "cute", email: user?.email ?? "", phone: phone ?? "555-555-5555")
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(user!.id)") else {
                     print("Error no URL")
                     return
@@ -80,11 +88,14 @@ class editUserVC: UIViewController, UITextFieldDelegate {
                 }.resume()
         self.dismiss(animated: true, completion: nil)
             }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //phone = textField.text ?? "1234"
-        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: user?.username ?? "", email: user?.email ?? "", phone: textField.text ?? "1234")
-        return true
+        self.resignFirstResponder()
+        
+        
+//        editedUserInfo = User(id: user?.id ?? 200, name: user!.name ?? "N/A", username: username ?? "", email: user?.email ?? "", phone: phone ?? "1234")
+        return false
     }
     
     }
