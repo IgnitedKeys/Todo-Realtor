@@ -64,7 +64,7 @@ extension UsersVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let user = self.users?[indexPath.row]
-        let detailVC = DetailVC()
+        let detailVC = UserTasksVC()
         detailVC.user = user
         show(detailVC, sender: self)
     }

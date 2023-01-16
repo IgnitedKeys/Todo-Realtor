@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailVC: UIViewController {
+class UserTasksVC: UIViewController {
     
     var tasks : [Task]?
     var user: User?
@@ -29,13 +29,8 @@ class DetailVC: UIViewController {
         
         let scrollView = UIScrollView()
         self.view.addSubview(scrollView)
+        setScrollView(scrollView)
 
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        //self.view.addSubview(tableView)
         scrollView.addSubview(tableView)
         setTableView()
         
@@ -44,15 +39,23 @@ class DetailVC: UIViewController {
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
             
-                            let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
-                            completeLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
-                            completeLabel.textAlignment = .center
-                            self.userInfoView.addSubview(completeLabel)
+                            let completedTasksLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
+                            completedTasksLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
+                            completedTasksLabel.textAlignment = .center
+                            self.userInfoView.addSubview(completedTasksLabel)
                         }
                     }
     }
         
-    //check id
+    func setScrollView(_ scrollView: UIScrollView){
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
     func setTableView() {
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskCell")
         tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "TableHeader")
@@ -98,7 +101,7 @@ class DetailVC: UIViewController {
     }
 }
 
-extension DetailVC: UITableViewDelegate, UITableViewDataSource {
+extension UserTasksVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.identifier, for: indexPath) as? TaskTableViewCell else {
             fatalError("Cannot dequeue \(TaskTableViewCell.identifier)")
@@ -117,18 +120,4 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeader.identifier)
         return header
     }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 20
-//    }
-  
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//        let task = self.tasks?[indexPath.row]
-//        let detailVC = DetailVC()
-//        detailVC.task = task
-////        navigationController?.pushViewController(detailVC, animated: true)
-//        show(detailVC, sender: self)
-//    }
 }
