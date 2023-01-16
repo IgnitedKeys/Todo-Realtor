@@ -16,7 +16,7 @@ class Decode {
                     //self.tasks = json
                     completion(json)
                 } catch {
-                    print(error)
+                    print("Error converting data into json object\n \(error)")
                 }
             }.resume()
         }
@@ -28,16 +28,15 @@ class Decode {
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url) {data, res, error in
                 guard let data = data else {
-                    return print("error")
+                    return print("No data")
                 }
                 let decoder = JSONDecoder()
                 
                 do {
                     let json = try decoder.decode([User].self, from: data)
-                    //self.tasks = json
                     completion(json)
                 } catch {
-                    print(error)
+                    print("Error converting data into json object\n \(error)")
                 }
             }.resume()
         }

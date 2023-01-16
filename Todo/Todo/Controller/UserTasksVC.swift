@@ -29,25 +29,25 @@ class UserTasksVC: UIViewController {
         
         let scrollView = UIScrollView()
         self.view.addSubview(scrollView)
-        setScrollView(scrollView)
-
+        setScrollViewContraints(scrollView)
+        
         scrollView.addSubview(tableView)
-        setTableView()
+        setUpTableView()
         
-        decoder.decodeTasks(url: "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 3)" ) { (data) in
-                        self.tasks = data
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-            
-                            let completedTasksLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
-                            completedTasksLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
-                            completedTasksLabel.textAlignment = .center
-                            self.userInfoView.addSubview(completedTasksLabel)
-                        }
-                    }
+        decoder.decodeTasks(url: "https://jsonplaceholder.typicode.com/todos?userId=\(user?.id ?? 201)" ) { (data) in
+            self.tasks = data
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                
+                let completedTasksLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
+                completedTasksLabel.text = "Completed Tasks: \(self.calculateTasks()) / \(self.tasks?.count ?? 0)"
+                completedTasksLabel.textAlignment = .center
+                self.userInfoView.addSubview(completedTasksLabel)
+            }
+        }
     }
-        
-    func setScrollView(_ scrollView: UIScrollView){
+    
+    func setScrollViewContraints(_ scrollView: UIScrollView){
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -55,13 +55,14 @@ class UserTasksVC: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func setTableView() {
+    func setUpTableView() {
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskCell")
         tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: "TableHeader")
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+    /// Creates labels for the users's username, phone, email and number of completed tasks
     func setUserInfo() {
         let usernameLabel = UILabel(frame: CGRect(x: 10, y: 60, width: self.view.bounds.size.width, height: 100))
         usernameLabel.text = "Username: \(user?.username ?? "N/A")"
@@ -78,8 +79,6 @@ class UserTasksVC: UIViewController {
         emailLabel.textAlignment = .center
         userInfoView.addSubview(emailLabel)
         
-
-        
         if tasks?.count != nil {
             let completeLabel = UILabel(frame: CGRect(x: 10, y: 180, width: self.view.bounds.size.width, height: 100))
             completeLabel.text = "\(tasks?.count)"
@@ -88,6 +87,8 @@ class UserTasksVC: UIViewController {
         }
     }
     
+    /// Counts the number of completed tasks in the tasks array
+    /// - Returns: Number of completed tasks
     func calculateTasks() -> Int {
         let filtered = tasks?.filter { task in
             return task.completed == true
@@ -95,6 +96,7 @@ class UserTasksVC: UIViewController {
         return filtered?.count ?? 0
     }
     
+    /// Send user data to editUserVC and presents the user edit sheet
     @objc func editUser() {
         let editUserVC = EditUserVC()
         editUserVC.user = user
@@ -111,10 +113,10 @@ extension UserTasksVC: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: tasks?[indexPath.row] ?? Task(userId: 1, id: 300, title: "Loading...", completed: false))
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks?.count ?? 10
-
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -128,10 +130,10 @@ extension UserTasksVC: UITableViewDelegate, UITableViewDataSource {
         if tasks?[indexPath.row].completed == true {
             UIView.animate(withDuration: 0.25,
                            delay: 0.05 * Double(indexPath.row),
-                       options: [.curveEaseInOut],
-                       animations: {
-            cell.backgroundColor = UIColor.systemGreen
-        })
+                           options: [.curveEaseInOut],
+                           animations: {
+                cell.backgroundColor = UIColor.systemGreen
+            })
         } else {
             UIView.animate(withDuration: 0,
                            animations: {
