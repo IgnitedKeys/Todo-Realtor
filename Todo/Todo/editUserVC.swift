@@ -13,14 +13,19 @@ class editUserVC: UIViewController {
         self.view.backgroundColor = .systemBackground
         
         let nameLabel = UILabel(frame: CGRect(x: 10, y: 10, width: self.view.bounds.size.width, height: 100))
-        nameLabel.text = "Editing \(user?.name ?? "N/A")"
+        nameLabel.text = user?.name ?? "N/A"
         nameLabel.textAlignment = .center
+        nameLabel.font = UIFont.systemFont(ofSize: 25)
         view.addSubview(nameLabel)
         
-        let userUsername = UITextField(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width, height: 40))
+        let userUsername = UITextField(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width - 20, height: 40))
 
         userUsername.placeholder = user?.username ?? "myUsername"
         userUsername.accessibilityLabel = "userUsername"
+        userUsername.font = UIFont.systemFont(ofSize: 20)
+        userUsername.borderStyle = UITextField.BorderStyle.roundedRect
+        userUsername.autocorrectionType = UITextAutocorrectionType.no
+        userUsername.keyboardType = UIKeyboardType.default
         userUsername.delegate = self
         self.view.addSubview(userUsername)
 
@@ -32,21 +37,26 @@ class editUserVC: UIViewController {
         userPhone.font = UIFont.systemFont(ofSize: 20)
         userPhone.borderStyle = UITextField.BorderStyle.roundedRect
         userPhone.autocorrectionType = UITextAutocorrectionType.no
-        userPhone.keyboardType = UIKeyboardType.default
+        userPhone.keyboardType = UIKeyboardType.numberPad
+        //check this
         userPhone.returnKeyType = UIReturnKeyType.done
         userPhone.delegate = self
         self.view.addSubview(userPhone)
         //phone = userPhone.text
         
-        let userEmail = UITextField(frame: CGRect(x: 10, y: 200 , width: self.view.bounds.size.width, height: 40))
+        let userEmail = UITextField(frame: CGRect(x: 10, y: 200 , width: self.view.bounds.size.width - 20, height: 40))
         userEmail.placeholder = user?.email ?? "example.@example.com"
         userEmail.accessibilityLabel = "userEmail"
+        userEmail.font = UIFont.systemFont(ofSize: 20)
+        userEmail.borderStyle = UITextField.BorderStyle.roundedRect
+        userEmail.autocorrectionType = UITextAutocorrectionType.no
+        userEmail.keyboardType = UIKeyboardType.emailAddress
         userEmail.delegate = self
         self.view.addSubview(userEmail)
     
         
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 50, y: 50, width: 100, height: 50)
+        button.frame = CGRect(x: self.view.bounds.midX - 50, y: 250, width: 100, height: 50)
         button.setTitle("edit user", for: .normal)
         button.addTarget(self, action: #selector(editUser), for: .touchUpInside)
         view.addSubview(button)
