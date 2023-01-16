@@ -8,7 +8,7 @@ class DetailVC: UIViewController {
     
     lazy var userInfoView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 280))
-        view.backgroundColor = .gray
+        view.backgroundColor = .secondarySystemBackground
         return view
     }()
     
@@ -21,6 +21,8 @@ class DetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = user?.name
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editUser))
         
         self.view.addSubview(userInfoView)
         setUserInfo()
@@ -87,6 +89,12 @@ class DetailVC: UIViewController {
             return task.completed == true
         }
         return filtered?.count ?? 0
+    }
+    
+    @objc func editUser() {
+        let editUserVC = editUserVC()
+        editUserVC.user = user
+        present(editUserVC, animated: true)
     }
 }
 

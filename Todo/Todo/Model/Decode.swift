@@ -1,10 +1,3 @@
-//
-//  Decode.swift
-//  Todo
-//
-//  Created by Gavin's Old Mac on 1/13/23.
-//
-
 import Foundation
 
 class Decode {

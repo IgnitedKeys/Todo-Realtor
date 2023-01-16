@@ -17,7 +17,7 @@ class TodoVC: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Team Members"
         
-        view.backgroundColor = .systemGray2
+        view.backgroundColor = .secondarySystemBackground
         
         //tableView = UITableView()
        

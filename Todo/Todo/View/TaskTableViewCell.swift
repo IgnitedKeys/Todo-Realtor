@@ -8,10 +8,10 @@ class TaskTableViewCell: UITableViewCell {
         textLabel?.text = task.title
         if task.completed == true {
             let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 17, weight: .medium, scale: .large)
-            imageView?.image = UIImage(systemName: "multiply.circle.fill", withConfiguration: imageConfiguration)
+            imageView?.image = UIImage(systemName: "checkmark.circle.fill", withConfiguration: imageConfiguration)
         } else {
             let imageConfiguration = UIImage.SymbolConfiguration(pointSize: 17, weight: .medium, scale: .large)
-            imageView?.image = UIImage(systemName: "multiply.circle", withConfiguration: imageConfiguration)
+            imageView?.image = UIImage(systemName: "circle", withConfiguration: imageConfiguration)
         }
     }
 
