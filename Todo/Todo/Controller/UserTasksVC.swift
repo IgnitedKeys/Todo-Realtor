@@ -96,7 +96,7 @@ class UserTasksVC: UIViewController {
     }
     
     @objc func editUser() {
-        let editUserVC = editUserVC()
+        let editUserVC = EditUserVC()
         editUserVC.user = user
         present(editUserVC, animated: true)
     }

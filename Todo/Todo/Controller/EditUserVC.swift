@@ -1,6 +1,6 @@
 import UIKit
 
-class editUserVC: UIViewController {
+class EditUserVC: UIViewController {
     
     var user : User?
     var editedUserInfo : User?
@@ -18,38 +18,26 @@ class editUserVC: UIViewController {
         nameLabel.font = UIFont.systemFont(ofSize: 25)
         view.addSubview(nameLabel)
         
-        let userUsername = UITextField(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width - 20, height: 40))
+        let userUsername = UserTextField(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width - 20, height: 40))
 
         userUsername.placeholder = user?.username ?? "myUsername"
         userUsername.accessibilityLabel = "userUsername"
-        userUsername.font = UIFont.systemFont(ofSize: 20)
-        userUsername.borderStyle = UITextField.BorderStyle.roundedRect
-        userUsername.autocorrectionType = UITextAutocorrectionType.no
         userUsername.keyboardType = UIKeyboardType.default
         userUsername.delegate = self
         self.view.addSubview(userUsername)
 
         
-        let userPhone = UITextField(frame: CGRect(x: 10, y: 150, width: self.view.bounds.size.width - 20, height: 40))
-
+        let userPhone = UserTextField(frame: CGRect(x: 10, y: 150, width: self.view.bounds.size.width - 20, height: 40))
         userPhone.placeholder = user?.phone ?? "555-555-5555"
         userPhone.accessibilityLabel = "userPhone"
-        userPhone.font = UIFont.systemFont(ofSize: 20)
-        userPhone.borderStyle = UITextField.BorderStyle.roundedRect
-        userPhone.autocorrectionType = UITextAutocorrectionType.no
         userPhone.keyboardType = UIKeyboardType.numberPad
-        //check this
-        userPhone.returnKeyType = UIReturnKeyType.done
         userPhone.delegate = self
         self.view.addSubview(userPhone)
-        //phone = userPhone.text
+
         
-        let userEmail = UITextField(frame: CGRect(x: 10, y: 200 , width: self.view.bounds.size.width - 20, height: 40))
+        let userEmail = UserTextField(frame: CGRect(x: 10, y: 200 , width: self.view.bounds.size.width - 20, height: 40))
         userEmail.placeholder = user?.email ?? "example.@example.com"
         userEmail.accessibilityLabel = "userEmail"
-        userEmail.font = UIFont.systemFont(ofSize: 20)
-        userEmail.borderStyle = UITextField.BorderStyle.roundedRect
-        userEmail.autocorrectionType = UITextAutocorrectionType.no
         userEmail.keyboardType = UIKeyboardType.emailAddress
         userEmail.delegate = self
         self.view.addSubview(userEmail)
@@ -115,7 +103,7 @@ class editUserVC: UIViewController {
             }
 }
 
-extension editUserVC: UITextFieldDelegate {
+extension EditUserVC: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
