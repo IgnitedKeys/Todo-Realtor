@@ -18,7 +18,7 @@ class UsersVC: UIViewController {
         
         view.backgroundColor = .secondarySystemBackground
         self.view.addSubview(tableView)
-        setTableView()
+        setUpTableView()
         
         decoder.decodeUsers() { (data) in
             print(data)
@@ -28,16 +28,15 @@ class UsersVC: UIViewController {
             }
         }
     }
-        
-    func setTableView() {
+    
+    func setUpTableView() {
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: UserTableViewCell.identifier)
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let horizontalConstraint = tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        let verticalConstraint = tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         let leadingConstraint = tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         let topConstraint = tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20)
         let bottomConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -54,10 +53,10 @@ extension UsersVC: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: users?[indexPath.row] ?? User(id: 1, name: "Loading...", username: "", email: "", phone: ""))
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users?.count ?? 10
-
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,5 +67,5 @@ extension UsersVC: UITableViewDelegate, UITableViewDataSource {
         detailVC.user = user
         show(detailVC, sender: self)
     }
-
+    
 }
