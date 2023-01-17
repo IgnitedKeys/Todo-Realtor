@@ -1,5 +1,6 @@
 import UIKit
 
+/// Custom table header for Task table
 class TableHeader: UITableViewHeaderFooterView {
     static let identifier = "TableHeader"
     

@@ -2,6 +2,10 @@ import Foundation
 
 class Decode {
     
+    /// Use JSONDecoder to get all user tasks
+    /// - Parameters:
+    ///   - filename: API path with the userId to get all user tasks
+    ///   - completion: Array of user's decoded Task objects
     func decodeTasks(url filename: String, completion: @escaping ([Task]) -> ()) {
         let urlString = filename
         if let url = URL(string: urlString) {
@@ -22,6 +26,8 @@ class Decode {
         }
     }
     
+    /// User JSONDecoder to get all users
+    /// - Parameter completion: Array of all User Objects
     func decodeUsers(completion: @escaping ([User]) -> ()) {
         let urlString = "https://jsonplaceholder.typicode.com/users/"
         //let urlString = "https://dummyjson.com/todos?limit=3"
@@ -41,6 +47,6 @@ class Decode {
             }.resume()
         }
     }
-
+    
 }
 

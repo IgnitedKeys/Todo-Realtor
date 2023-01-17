@@ -1,13 +1,7 @@
-//
-//  UserTextField.swift
-//  Todo
-//
-//  Created by Gavin's Old Mac on 1/16/23.
-//
-
 import Foundation
 import UIKit
 
+/// Custom style for text fields
 class UserTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
