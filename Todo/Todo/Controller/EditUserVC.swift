@@ -24,7 +24,7 @@ class EditUserVC: UIViewController {
         
         let userUsername = UserTextField(frame: CGRect(x: 10, y: 100, width: self.view.bounds.size.width - 20, height: 40))
         
-        userUsername.placeholder = user?.username ?? "myUsername"
+        userUsername.placeholder = "Username: \(user?.username ?? " ")"
         userUsername.accessibilityLabel = "userUsername"
         userUsername.keyboardType = UIKeyboardType.default
         userUsername.delegate = self
@@ -32,14 +32,14 @@ class EditUserVC: UIViewController {
         
         
         let userPhone = UserTextField(frame: CGRect(x: 10, y: 150, width: self.view.bounds.size.width - 20, height: 40))
-        userPhone.placeholder = user?.phone ?? "555-555-5555"
+        userPhone.placeholder = "Phone: \(user?.phone ?? " ")"
         userPhone.accessibilityLabel = "userPhone"
         userPhone.delegate = self
         self.view.addSubview(userPhone)
         
         
         let userEmail = UserTextField(frame: CGRect(x: 10, y: 200 , width: self.view.bounds.size.width - 20, height: 40))
-        userEmail.placeholder = user?.email ?? "example.@example.com"
+        userEmail.placeholder = "Email: \(user?.email ?? " ")"
         userEmail.accessibilityLabel = "userEmail"
         userEmail.keyboardType = UIKeyboardType.emailAddress
         userEmail.delegate = self
